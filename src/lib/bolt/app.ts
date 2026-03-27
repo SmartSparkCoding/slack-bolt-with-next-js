@@ -11,13 +11,14 @@ const app = new App({
   deferInitialization: true,
 });
 
-registerListeners(app);
+// Wrap async logic in an IIFE to avoid top-level await
+(async () => {
+  await app.init();
 
-// --- Auto-join all channels Jacob is in ---
-async function joinAllChannels(app: App) {
+  // Auto-join all channels Jacob is in
   try {
     const result = await app.client.users.conversations({
-      user: "U0AEYDUCLKF", // Jacob's Slack user ID
+      user: "U0AEYDUCLKF",
       types: "public_channel,private_channel",
     });
 
@@ -26,19 +27,15 @@ async function joinAllChannels(app: App) {
         await app.client.conversations.join({
           channel: channel.id,
         });
-      } catch (e) {
-        // Ignore errors like "already_in_channel"
+      } catch {
+        // ignore "already_in_channel" errors
       }
     }
   } catch (error) {
     console.error("Error joining channels:", error);
   }
-}
+})();
 
-// --- IMPORTANT: Initialize the app before using app.client ---
-await app.init();
-
-// Now it's safe to call Slack Web API
-joinAllChannels(app);
+registerListeners(app);
 
 export { app, receiver };
