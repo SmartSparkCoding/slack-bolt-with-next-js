@@ -5,35 +5,33 @@ import type {
 
 const socials: Record<string, string> = {
   website: "https://jacob-personal-website.pages.dev/",
-  instagram: "https://instagram.com/yourusername",
-  github: "https://github.com/smartsparkcoding/",
-  twitter: "https://twitter.com/yourusername",
 };
 
 const miniJacobSocialsCommand = async ({
   ack,
   command,
-  respond,
+  client,
   logger,
 }: AllMiddlewareArgs & SlackCommandMiddlewareArgs) => {
   try {
     await ack();
 
     const args = command.text.trim().toLowerCase();
-
-    if (!args) {
-      await respond("Usage: `/mini-jacob-socials <website|instagram|github|twitter>`");
-      return;
-    }
-
     const link = socials[args];
 
-    if (!link) {
-      await respond(`Unknown social: *${args}*. Try one of: ${Object.keys(socials).join(", ")}`);
+    if (!args || !link) {
+      await client.chat.postMessage({
+        channel: command.channel_id,
+        text: `Unknown social: ${args}. Try: website`,
+      });
       return;
     }
 
-    await respond(`Here’s Jacob’s **${args}**: ${link}`);
+    await client.chat.postMessage({
+      channel: command.channel_id,
+      text: `Jacob’s ${args}: ${link}`,
+    });
+
   } catch (error) {
     logger.error(error);
   }
