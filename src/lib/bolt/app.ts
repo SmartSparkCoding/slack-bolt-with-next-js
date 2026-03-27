@@ -23,14 +23,15 @@ const app = new App({
     });
 
     for (const channel of result.channels ?? []) {
-      try {
-        await app.client.conversations.join({
-          channel: channel.id,
-        });
-      } catch {
-        // ignore "already_in_channel" errors
-      }
-    }
+  try {
+    await app.client.conversations.join({
+      channel: channel.id!, // <-- this is the fix
+    });
+  } catch {
+    // ignore "already_in_channel" errors
+  }
+}
+
   } catch (error) {
     console.error("Error joining channels:", error);
   }
