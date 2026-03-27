@@ -19,17 +19,18 @@ const jacobMentionListener = async ({
   logger,
 }: AllMiddlewareArgs & SlackEventMiddlewareArgs<"message">) => {
   try {
-    // Only react to real messages
-    if (!event.text) return;
+    // Only handle real text messages
+    if (event.type !== "message" || typeof event.text !== "string") return;
 
     // Check if someone mentioned Jacob
     if (!event.text.includes("<@U0AEYDUCLKF>")) return;
 
-    const random = locatingMessages[Math.floor(Math.random() * locatingMessages.length)];
+    const random =
+      locatingMessages[Math.floor(Math.random() * locatingMessages.length)];
 
     await client.chat.postMessage({
       channel: event.channel,
-      thread_ts: event.ts, // reply in thread (optional)
+      thread_ts: event.ts,
       text: random,
     });
   } catch (error) {
