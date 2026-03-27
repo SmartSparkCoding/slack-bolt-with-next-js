@@ -4,9 +4,9 @@ import type {
 } from "@slack/bolt";
 
 const socials: Record<string, string> = {
-  website: "https://your-website.com",
+  website: "https://jacob-personal-website.pages.dev/",
   instagram: "https://instagram.com/yourusername",
-  github: "https://github.com/yourusername",
+  github: "https://github.com/smartsparkcoding/",
   twitter: "https://twitter.com/yourusername",
 };
 
