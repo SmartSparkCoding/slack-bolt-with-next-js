@@ -22,7 +22,7 @@ const app = new App({
       types: "public_channel,private_channel",
     });
 
-    for (const channel of result.channels) {
+    for (const channel of result.channels ?? []) {
       try {
         await app.client.conversations.join({
           channel: channel.id,
