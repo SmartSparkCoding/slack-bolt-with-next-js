@@ -35,6 +35,10 @@ async function joinAllChannels(app: App) {
   }
 }
 
+// --- IMPORTANT: Initialize the app before using app.client ---
+await app.init();
+
+// Now it's safe to call Slack Web API
 joinAllChannels(app);
 
 export { app, receiver };
