@@ -19,8 +19,14 @@ const jacobMentionListener = async ({
   logger,
 }: AllMiddlewareArgs & SlackEventMiddlewareArgs<"message">) => {
   try {
-    // Only handle real text messages
-    if (event.type !== "message" || typeof event.text !== "string") return;
+    // Only handle real user messages with text
+    if (
+      event.type !== "message" ||
+      !("text" in event) ||
+      typeof event.text !== "string"
+    ) {
+      return;
+    }
 
     // Check if someone mentioned Jacob
     if (!event.text.includes("<@U0AEYDUCLKF>")) return;
