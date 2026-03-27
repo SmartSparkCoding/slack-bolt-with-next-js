@@ -29,7 +29,7 @@ const miniJacobSocialsCommand = async ({
 
     await client.chat.postMessage({
       channel: command.channel_id,
-      text: `Jacob’s ${args}: ${link}`,
+      text: `@U0AEYDUCLKF ’s ${args}: ${link}`,
     });
 
   } catch (error) {
