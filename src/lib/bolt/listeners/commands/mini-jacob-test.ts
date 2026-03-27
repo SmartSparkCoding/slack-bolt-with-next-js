@@ -5,12 +5,19 @@ import type {
 
 const miniJacobTestCommand = async ({
   ack,
-  respond,
+  command,
+  client,
   logger,
 }: AllMiddlewareArgs & SlackCommandMiddlewareArgs) => {
   try {
     await ack();
-    await respond("Hey Jacob, wassup!");
+
+    // Send a PUBLIC message to the channel
+    await client.chat.postMessage({
+      channel: command.channel_id,
+      text: "Hey Jacob, wassup!",
+    });
+
   } catch (error) {
     logger.error(error);
   }
