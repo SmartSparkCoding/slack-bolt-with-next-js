@@ -13,4 +13,28 @@ const app = new App({
 
 registerListeners(app);
 
+// --- Auto-join all channels Jacob is in ---
+async function joinAllChannels(app: App) {
+  try {
+    const result = await app.client.users.conversations({
+      user: "U0AEYDUCLKF", // Jacob's Slack user ID
+      types: "public_channel,private_channel",
+    });
+
+    for (const channel of result.channels) {
+      try {
+        await app.client.conversations.join({
+          channel: channel.id,
+        });
+      } catch (e) {
+        // Ignore errors like "already_in_channel"
+      }
+    }
+  } catch (error) {
+    console.error("Error joining channels:", error);
+  }
+}
+
+joinAllChannels(app);
+
 export { app, receiver };
