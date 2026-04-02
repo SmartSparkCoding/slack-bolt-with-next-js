@@ -10,13 +10,17 @@ export async function GET() {
   const userId = "U0AEYDUCLKF";
 
   const dm = await client.conversations.open({
-    users: userId
-  });
+  users: userId
+});
 
-  await client.chat.postMessage({
-    channel: dm.channel.id!,
-    text: `🌙 Midnight Update\n\n${message}`
-  });
+if (!dm.channel?.id) {
+  throw new Error("Failed to open DM channel");
+}
+
+await client.chat.postMessage({
+  channel: dm.channel.id,
+  text: `🌙 Midnight Update\n\n${message}`
+});
 
   return NextResponse.json({ success: true });
 }
