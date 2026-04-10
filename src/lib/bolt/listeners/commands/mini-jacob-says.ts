@@ -3,7 +3,7 @@ import type {
   SlackCommandMiddlewareArgs,
 } from "@slack/bolt";
 
-const miniJacobSocialsCommand = async ({
+const miniJacobSaysCommand = async ({
   ack,
   command,
   client,
@@ -32,4 +32,4 @@ const miniJacobSocialsCommand = async ({
   }
 };
 
-export default miniJacobSocialsCommand;
+export default miniJacobSaysCommand;
