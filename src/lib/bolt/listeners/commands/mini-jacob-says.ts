@@ -3,10 +3,6 @@ import type {
   SlackCommandMiddlewareArgs,
 } from "@slack/bolt";
 
-const socials: Record<string, string> = {
-  website: "https://jacob-personal-website.pages.dev/",
-};
-
 const miniJacobSocialsCommand = async ({
   ack,
   command,
@@ -16,20 +12,19 @@ const miniJacobSocialsCommand = async ({
   try {
     await ack();
 
-    const args = command.text.trim().toLowerCase();
-    const link = socials[args];
+    const text = command.text.trim();
 
-    if (!args || !link) {
+    if (!text) {
       await client.chat.postMessage({
         channel: command.channel_id,
-        text: `Unknown social: ${args}. Try: website`,
+        text: "You need to type a message after the command.",
       });
       return;
     }
 
     await client.chat.postMessage({
       channel: command.channel_id,
-      text: `Jacob’s ${args}: ${link}`,
+      text: text,
     });
 
   } catch (error) {
