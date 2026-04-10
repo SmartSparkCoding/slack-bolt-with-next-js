@@ -5,6 +5,7 @@ import type {
 
 const socials: Record<string, string> = {
   website: "https://jacob-personal-website.pages.dev/",
+  rsvp: "https://hackanomous.vercel.app/",
 };
 
 const miniJacobSocialsCommand = async ({
