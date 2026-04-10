@@ -2,9 +2,6 @@ import { App } from "@slack/bolt";
 import { VercelReceiver } from "@vercel/slack-bolt";
 import registerListeners from "./listeners";
 
-// ✅ ADD THIS LINE
-import registerRSVPCommand from "./listeners/commands/rsvp";
-
 const receiver = new VercelReceiver();
 
 const app = new App({
