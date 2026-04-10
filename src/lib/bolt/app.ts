@@ -39,7 +39,5 @@ const app = new App({
 // existing listeners
 registerListeners(app);
 
-// ✅ ADD THIS LINE
-registerRSVPCommand(app);
 
 export { app, receiver };
