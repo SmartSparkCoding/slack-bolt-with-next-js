@@ -20,3 +20,5 @@ export const triggerHackanomous = async ({
     logger.error(error);
   }
 };
+
+export default triggerHackanomous;
