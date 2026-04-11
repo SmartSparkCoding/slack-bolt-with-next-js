@@ -1,6 +1,6 @@
 import type { AllMiddlewareArgs, SlackEventMiddlewareArgs } from "@slack/bolt";
 
-export const sampleMessageCallback = async ({
+export const triggerHackanomous = async ({
   event,
   client,
   logger,
