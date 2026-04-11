@@ -15,8 +15,8 @@ const triggerHackanomous = async ({
       return;
     }
 
-    // ❌ STOP if message is inside a thread
-    if (event.thread_ts) return;
+    // ❌ STOP if message is inside a thread (SAFE CHECK)
+    if ("thread_ts" in event && event.thread_ts) return;
 
     // Prevent bot loops
     if ("subtype" in event && event.subtype === "bot_message") return;
